@@ -19,3 +19,15 @@ A stock market predictor that forecasts next-day prices using machine learning a
    ```bash
    python app.py
    ``` 
+
+## Features
+- Real-time data fetching
+- Predicts 1-day ahead stock prices
+- Beautiful charts using D3.js/Chart.js
+
+## Tools Used
+JavaScript | Python | Flask | TensorFlow.js | D3.js | HTML/CSS
+
+## Future Work
+- Integrate with Power BI
+- Add risk analysis
