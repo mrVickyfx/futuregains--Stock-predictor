@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Price Predictor</h1>
+        
+        <div class="search-container">
+            <form id="prediction-form">
+                <div class="stock-select-container">
+                    <input type="text" id="symbol" name="symbol" list="stock-list" placeholder="Enter stock symbol (e.g., AAPL)" required>
+                    <datalist id="stock-list">
+                        <!-- Will be populated dynamically -->
+                    </datalist>
+                    <button type="button" id="show-stocks-btn">Show All Stocks</button>
+                </div>
+                <button type="submit">Predict</button>
+            </form>
+        </div>
+
+        <div id="stocks-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Available Stocks</h2>
+                <input type="text" id="stock-search" placeholder="Search stocks...">
+                <div class="stocks-grid">
+                    <div class="stock-header">
+                        <span>Symbol</span>
+                        <span>Name</span>
+                        <span>Sector</span>
+                        <span>Price</span>
+                    </div>
+                    <div id="stocks-list">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="hidden">
+            <div class="loader"></div>
+            <p>Analyzing stock data...</p>
+        </div>
+
+        <div id="result" class="hidden">
+            <h2 id="stock-symbol"></h2>
+            
+            <div class="price-container">
+                <div class="price-box">
+                    <h3>Current Price</h3>
+                    <p id="current-price"></p>
+                </div>
+                <div class="price-box">
+                    <h3>Predicted Price</h3>
+                    <p id="predicted-price"></p>
+                    <p class="prediction-range" id="prediction-range"></p>
+                </div>
+            </div>
+
+            <div class="confidence-container">
+                <h3>Prediction Confidence</h3>
+                <div class="confidence-meter">
+                    <div class="confidence-bar" id="confidence-bar"></div>
+                    <span id="confidence-level"></span>
+                </div>
+                <div class="trend-indicator">
+                    <span id="trend-direction"></span>
+                    <span id="trend-strength"></span>
+                </div>
+            </div>
+
+            <div class="metrics-container">
+                <h3>Model Performance Metrics</h3>
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <h4>Mean Absolute Error</h4>
+                        <p id="mae"></p>
+                    </div>
+                    <div class="metric-box">
+                        <h4>Root Mean Square Error</h4>
+                        <p id="rmse"></p>
+                    </div>
+                    <div class="metric-box">
+                        <h4>R² Score</h4>
+                        <p id="r2"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Historical Performance</h3>
+                <canvas id="priceChart"></canvas>
+            </div>
+
+            <div class="news-container">
+                <h3>Latest News</h3>
+                <div class="news-filters">
+                    <button class="news-filter active" data-sentiment="all">All News</button>
+                    <button class="news-filter" data-sentiment="positive">Positive</button>
+                    <button class="news-filter" data-sentiment="negative">Negative</button>
+                </div>
+                <div id="news-list"></div>
+            </div>
+
+            <div class="export-container">
+                <button id="export-btn">Export Historical Data (CSV)</button>
+            </div>
+        </div>
+
+        <div id="error" class="hidden">
+            <p class="error-message"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
